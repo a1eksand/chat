@@ -4,7 +4,6 @@ import io.may4th.chat.security.api.exceptions.AccessDeniedException;
 import io.may4th.chat.security.api.exceptions.AuthenticationException;
 import io.may4th.chat.security.impl.UserDetailsRequestHolder;
 import lombok.AllArgsConstructor;
-import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
@@ -27,14 +26,14 @@ public class SecurityHandlerInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        val handlerMethod = (HandlerMethod) handler;
+        var handlerMethod = (HandlerMethod) handler;
 
-        val classLevelSecure = handlerMethod.getBeanType().getAnnotation(Secured.class);
+        var classLevelSecure = handlerMethod.getBeanType().getAnnotation(Secured.class);
         if (classLevelSecure != null) {
             check(classLevelSecure);
         }
 
-        val methodLevelSecure = handlerMethod.getMethodAnnotation(Secured.class);
+        var methodLevelSecure = handlerMethod.getMethodAnnotation(Secured.class);
         if (methodLevelSecure != null) {
             check(methodLevelSecure);
         }
@@ -43,12 +42,12 @@ public class SecurityHandlerInterceptor implements HandlerInterceptor {
     }
 
     private void check(Secured secured) {
-        val userDetails = userDetailsRequestHolder.getUserDetails();
+        var userDetails = userDetailsRequestHolder.getUserDetails();
         if (secured.value().length == 0 && userDetails.isPresent()) {
             return;
         }
 
-        val requiredAuthorities = Arrays.asList(secured.value());
+        var requiredAuthorities = Arrays.asList(secured.value());
         if (!userDetails
             .orElseThrow(AuthenticationException::new)
             .getAuthorities()

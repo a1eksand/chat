@@ -6,7 +6,6 @@ import io.may4th.chat.security.api.UserDetails;
 import io.may4th.chat.security.api.exceptions.AuthenticationException;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
-import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -37,8 +36,8 @@ public class TokenProviderImpl extends BaseCoder implements TokenProvider {
     @Override
     @SneakyThrows
     public String generateToken(UserDetails userDetails) {
-        val now = System.currentTimeMillis();
-        val authToken = new AuthToken()
+        var now = System.currentTimeMillis();
+        var authToken = new AuthToken()
             .setUserId(userDetails.getId())
             .setIssuedAt(System.currentTimeMillis())
             .setExpireAt(now + lifetime)
@@ -63,8 +62,8 @@ public class TokenProviderImpl extends BaseCoder implements TokenProvider {
     }
 
     private byte[] toBytes(long... longs) {
-        val buffer = ByteBuffer.allocate(Long.SIZE * longs.length / Byte.SIZE);
-        for (val value : longs) {
+        var buffer = ByteBuffer.allocate(Long.SIZE * longs.length / Byte.SIZE);
+        for (var value : longs) {
             buffer.putLong(value);
         }
         return buffer.array();

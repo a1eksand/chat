@@ -13,7 +13,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
-import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -65,7 +64,7 @@ public class MessageController {
         @ApiIgnore @CurrentUser UserDetailsImpl currentUser,
         @RequestBody @Valid NewMessageTO newMessageTO
     ) {
-        val messageTO = chatService.postMessage(currentUser, newMessageTO);
+        var messageTO = chatService.postMessage(currentUser, newMessageTO);
         wsService.send(new WsMessage("/room" + messageTO.getRoomId(), messageTO.getClass().getSimpleName(), messageTO));
         return messageTO;
     }

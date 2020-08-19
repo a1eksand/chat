@@ -6,7 +6,6 @@ import io.may4th.chat.services.api.MessageService;
 import io.may4th.chat.services.api.tos.MessageTO;
 import io.may4th.chat.services.api.tos.NewMessageTO;
 import io.may4th.chat.services.impl.mappers.MessageMapper;
-import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +35,7 @@ public class MessageServiceImpl extends BaseService<Message, MessageTO, NewMessa
 
     @Override
     public MessageTO save(NewMessageTO newMessageTO) {
-        val message = messageMapper.en(newMessageTO);
+        var message = messageMapper.en(newMessageTO);
         message.setTimestamp(ZonedDateTime.now());
         return messageMapper.to(messageRepository.save(message));
     }

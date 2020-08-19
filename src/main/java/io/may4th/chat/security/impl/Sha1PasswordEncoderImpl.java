@@ -1,7 +1,6 @@
 package io.may4th.chat.security.impl;
 
 import io.may4th.chat.security.api.PasswordEncoder;
-import lombok.val;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -18,14 +17,14 @@ public class Sha1PasswordEncoderImpl extends BaseCoder implements PasswordEncode
     }
 
     private byte[] join(byte[] a, byte[] b) {
-        val result = new byte[a.length + b.length];
+        var result = new byte[a.length + b.length];
         System.arraycopy(a, 0, result, 0, a.length);
         System.arraycopy(b, 0, result, a.length, b.length);
         return result;
     }
 
     private byte[] salt() {
-        val data = new byte[SALT_LENGTH];
+        var data = new byte[SALT_LENGTH];
         new Random().nextBytes(data);
         return data;
     }
@@ -35,8 +34,8 @@ public class Sha1PasswordEncoderImpl extends BaseCoder implements PasswordEncode
         if (rawPassword.length() == 0) {
             throw new IllegalArgumentException();
         }
-        val salt = salt();
-        val hash = hash(salt, rawPassword.toString().getBytes());
+        var salt = salt();
+        var hash = hash(salt, rawPassword.toString().getBytes());
         return encode(join(salt, hash));
     }
 
@@ -48,9 +47,9 @@ public class Sha1PasswordEncoderImpl extends BaseCoder implements PasswordEncode
         if (encodedPassword.length() == 0) {
             throw new IllegalArgumentException();
         }
-        val pass = decode(encodedPassword);
-        val salt = Arrays.copyOfRange(pass, 0, SALT_LENGTH);
-        val hash = Arrays.copyOfRange(pass, SALT_LENGTH, pass.length);
+        var pass = decode(encodedPassword);
+        var salt = Arrays.copyOfRange(pass, 0, SALT_LENGTH);
+        var hash = Arrays.copyOfRange(pass, SALT_LENGTH, pass.length);
         return Arrays.equals(hash, hash(salt, rawPassword.toString().getBytes()));
     }
 }

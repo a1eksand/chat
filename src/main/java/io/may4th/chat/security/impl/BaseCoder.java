@@ -1,8 +1,6 @@
 package io.may4th.chat.security.impl;
 
 import lombok.SneakyThrows;
-import lombok.val;
-
 import java.security.MessageDigest;
 import java.util.Base64;
 
@@ -24,8 +22,8 @@ class BaseCoder {
 
     @SneakyThrows
     byte[] hash(byte[]... data) {
-        val digest = MessageDigest.getInstance(algorithm);
-        for (val chunk : data) {
+        var digest = MessageDigest.getInstance(algorithm);
+        for (var chunk : data) {
             digest.update(chunk);
         }
         return digest.digest();

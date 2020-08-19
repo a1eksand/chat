@@ -8,7 +8,6 @@ import io.may4th.chat.services.api.UserService;
 import io.may4th.chat.services.api.tos.NewUserTO;
 import io.may4th.chat.web.payload.AuthTokenResponse;
 import lombok.AllArgsConstructor;
-import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,9 +34,9 @@ public class AuthService {
     }
 
     public AuthTokenResponse authenticate(String username, String password) {
-        val userDetails = userDetailsService.loadUserByUsername(username);
+        var userDetails = userDetailsService.loadUserByUsername(username);
         if (passwordEncoder.matches(password, userDetails.getPassword())) {
-            val token = tokenProvider.generateToken(userDetails);
+            var token = tokenProvider.generateToken(userDetails);
             return new AuthTokenResponse(token);
         }
         throw new AuthenticationException();

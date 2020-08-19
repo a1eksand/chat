@@ -2,8 +2,9 @@
 
 ## System requirement
 
-- JDK 8
-- Docker
+- JDK 14
+- Docker 19
+- Docker Compose 1.25
 
 ## Available Scripts of .
 
@@ -21,7 +22,7 @@ Runs the backend app in the development mode
 
 ## System requirement
 
-- Node 10
+- Node 12
 - Yarn
 
 ## Available Scripts of .

@@ -1,6 +1,5 @@
 package io.may4th.chat.domain.impl;
 
-import lombok.val;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
@@ -15,7 +14,7 @@ public class MongoConfig {
 
     @Bean
     public MongoCustomConversions mongoCustomConversions() {
-        val converters = new ArrayList<Converter<?, ?>>();
+        var converters = new ArrayList<Converter<?, ?>>();
         converters.add(JSR310DateConverters.DateToZonedDateTimeConverter.INSTANCE);
         converters.add(JSR310DateConverters.ZonedDateTimeToDateConverter.INSTANCE);
         return new MongoCustomConversions(converters);

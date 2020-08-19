@@ -7,7 +7,6 @@ import io.may4th.chat.services.api.exceptions.ResourceNotFoundException;
 import io.may4th.chat.services.api.tos.NewUserTO;
 import io.may4th.chat.services.api.tos.UserTO;
 import io.may4th.chat.services.impl.mappers.UserMapper;
-import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +35,7 @@ public class UserServiceImpl extends BaseService<User, UserTO, NewUserTO> implem
 
     @Override
     public UserTO save(NewUserTO newUserTO) {
-        val user = userMapper.en(newUserTO);
+        var user = userMapper.en(newUserTO);
         user.setId(UUID.randomUUID());
         user.setRooms(Collections.emptyList());
         return userMapper.to(userRepository.save(user));
