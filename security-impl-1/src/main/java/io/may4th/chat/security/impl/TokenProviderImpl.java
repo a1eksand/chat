@@ -2,12 +2,10 @@ package io.may4th.chat.security.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.may4th.chat.security.api.SecurityProperties;
 import io.may4th.chat.security.api.TokenProvider;
 import io.may4th.chat.security.api.UserDetails;
 import io.may4th.chat.security.api.exceptions.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.nio.ByteBuffer;
@@ -19,27 +17,30 @@ public class TokenProviderImpl extends BaseCoder implements TokenProvider {
 
     private static final String ALGORITHM = "SHA-1";
 
+    private static final long LIFETIME_MILLIS = 3600000;
+
+    private static final int SECRET_LENGTH = 128;
+
     private final ObjectMapper objectMapper;
 
     private final byte[] secret;
 
-    private final long lifetime;
+
 
     @Autowired
-    TokenProviderImpl(@Qualifier("securityPropertiesImpl") SecurityProperties securityProperties, ObjectMapper objectMapper) {
+    TokenProviderImpl(ObjectMapper objectMapper) {
         super(ALGORITHM);
-        this.secret = securityProperties.getTokenSecret().getBytes();
-        this.lifetime = securityProperties.getTokenLifetime();
+        this.secret = new byte[SECRET_LENGTH];
+        new Random().nextBytes(this.secret);
         this.objectMapper = objectMapper;
     }
 
     @Override
-    public String generateToken(UserDetails userDetails) {
-        var now = System.currentTimeMillis();
+    public String generateToken(UserDetails userDetails, long now) {
         var authToken = new AuthToken()
             .setUserId(userDetails.getId())
-            .setIssuedAt(System.currentTimeMillis())
-            .setExpireAt(now + lifetime)
+            .setIssuedAt(now)
+            .setExpireAt(now + LIFETIME_MILLIS)
             .setSeed(new Random().nextLong());
 
         authToken.setSing(sing(authToken));

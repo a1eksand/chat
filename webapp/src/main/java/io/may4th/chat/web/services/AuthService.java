@@ -36,7 +36,8 @@ public class AuthService {
     public AuthTokenResponse authenticate(String username, String password) {
         var userDetails = userDetailsService.loadUserByUsername(username);
         if (passwordEncoder.matches(password, userDetails.getPassword())) {
-            var token = tokenProvider.generateToken(userDetails);
+            var now = System.currentTimeMillis();
+            var token = tokenProvider.generateToken(userDetails, now);
             return new AuthTokenResponse(token);
         }
         throw new AuthenticationException();
