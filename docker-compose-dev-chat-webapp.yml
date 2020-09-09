@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  chat-webapp:
+    image: 'chat-webapp:SNAPSHOT'
+    ports:
+      - "8080:8080"
+      - "5005:5005"
+    environment:
+      JVM_OPTS: "-Xmx128m -Xms128m -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+      APP_OPTS: "--spring.data.mongodb.host=storage-mongodb"
+
+  storage-mongodb:
+    image: 'bitnami/mongodb:4'
+    ports:
+      - "27017:27017"
