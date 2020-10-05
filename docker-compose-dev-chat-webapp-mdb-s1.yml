@@ -1,8 +1,8 @@
 version: '3'
 
 services:
-  chat-webapp:
-    image: 'chat-webapp:SNAPSHOT'
+  chat-webapp-mdb-s1:
+    image: 'chat-webapp-mdb-s1:SNAPSHOT'
     ports:
       - "8080:8080"
       - "5005:5005"

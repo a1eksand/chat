@@ -8,7 +8,7 @@
 
 ## Available Scripts of .
 
-#### `./mvnw clean package -DskipTests && docker build -f dev-chat-webapp.Dockerfile -t chat-webapp:SNAPSHOT . && ./mvnw clean`
+#### `./mvnw clean package -DskipTests && docker build -f dev-chat-webapp-mdb-s1.Dockerfile -t chat-webapp-mdb-s1:SNAPSHOT . && ./mvnw clean`
 
 Builds backend app image
 
@@ -39,7 +39,7 @@ Runs backend app in development mode
 
 Installs required packages
 
-#### `docker-compose -f docker-compose-dev-chat-webapp.yml up`
+#### `docker-compose -f docker-compose-dev-chat-webapp-mdb-s1.yml up`
 
 Ups MongoDB and backend app
 

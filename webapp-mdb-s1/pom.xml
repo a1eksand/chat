@@ -10,33 +10,29 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>chat-service-impl-mongo</artifactId>
+    <artifactId>chat-webapp-mdb-s1</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>chat-service-impl-mongo</name>
+    <name>chat-webapp-mdb-s1</name>
 
     <dependencies>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct</artifactId>
-            <version>${mapstruct.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
             <groupId>io.may4th</groupId>
-            <artifactId>chat-domain-api</artifactId>
+            <artifactId>chat-domain-impl-mongo</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>io.may4th</groupId>
-            <artifactId>chat-service-api</artifactId>
+            <artifactId>chat-service-impl-mongo</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>io.may4th</groupId>
+            <artifactId>chat-security-impl-1</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>io.may4th</groupId>
+            <artifactId>chat-webapp-impl</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
@@ -50,19 +46,11 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                            <version>${lombok.version}</version>
-                        </path>
-                        <path>
-                            <groupId>org.mapstruct</groupId>
-                            <artifactId>mapstruct-processor</artifactId>
-                            <version>${mapstruct.version}</version>
-                        </path>
-                    </annotationProcessorPaths>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

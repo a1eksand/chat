@@ -23,7 +23,9 @@
         <module>service-impl-mongo</module>
         <module>security-api</module>
         <module>security-impl-1</module>
-        <module>webapp</module>
+        <module>webapp-api</module>
+        <module>webapp-impl</module>
+        <module>webapp-mdb-s1</module>
     </modules>
 
     <properties>
