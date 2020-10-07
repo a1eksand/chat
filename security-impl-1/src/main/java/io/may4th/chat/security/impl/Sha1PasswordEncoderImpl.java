@@ -30,26 +30,26 @@ public class Sha1PasswordEncoderImpl extends BaseCoder implements PasswordEncode
     }
 
     @Override
-    public String encode(CharSequence rawPassword) {
-        if (rawPassword.length() == 0) {
+    public String encode(String rawPassword) {
+        if (rawPassword.isEmpty()) {
             throw new IllegalArgumentException();
         }
         var salt = salt();
-        var hash = hash(salt, rawPassword.toString().getBytes());
+        var hash = hash(salt, rawPassword.getBytes());
         return encode(join(salt, hash));
     }
 
     @Override
-    public boolean matches(CharSequence rawPassword, String encodedPassword) {
-        if (rawPassword.length() == 0) {
+    public boolean matches(String rawPassword, String encodedPassword) {
+        if (rawPassword.isEmpty()) {
             throw new IllegalArgumentException();
         }
-        if (encodedPassword.length() == 0) {
+        if (encodedPassword.isEmpty()) {
             throw new IllegalArgumentException();
         }
         var pass = decode(encodedPassword);
         var salt = Arrays.copyOfRange(pass, 0, SALT_LENGTH);
         var hash = Arrays.copyOfRange(pass, SALT_LENGTH, pass.length);
-        return Arrays.equals(hash, hash(salt, rawPassword.toString().getBytes()));
+        return Arrays.equals(hash, hash(salt, rawPassword.getBytes()));
     }
 }

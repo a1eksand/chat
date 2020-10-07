@@ -26,12 +26,17 @@ public class AuthenticationProvider {
     Optional<UserDetails> extractUserDetails(HttpServletRequest request) {
         return extractToken(request)
             .filter(StringUtils::hasText)
-            .map(tokenProvider::extractToken)
-            .filter(tokenProvider::isValid)
+            .map(tokenProvider::extractAuthTokenTO)
+            .filter(tokenProvider::isSingValid)
+            .filter(this::isNotExpired)
             .map(authToken -> userDetailsService.loadUserById(authToken.getUserId()));
     }
 
     private Optional<String> extractToken(HttpServletRequest request) {
         return request != null ? Optional.ofNullable(request.getHeader(AUTHORIZATION_HEADER)) : Optional.empty();
+    }
+
+    private boolean isNotExpired(AuthTokenTO authTokenTo) {
+        return System.currentTimeMillis() < authTokenTo.getExpireAt();
     }
 }

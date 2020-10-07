@@ -1,6 +1,6 @@
 package io.may4th.chat.security.impl;
 
-class AuthToken {
+public class AuthTokenTO {
 
     private String userId;
     private long issuedAt;
@@ -12,7 +12,7 @@ class AuthToken {
         return userId;
     }
 
-    public AuthToken setUserId(String userId) {
+    public AuthTokenTO setUserId(String userId) {
         this.userId = userId;
         return this;
     }
@@ -21,7 +21,7 @@ class AuthToken {
         return issuedAt;
     }
 
-    public AuthToken setIssuedAt(long issuedAt) {
+    public AuthTokenTO setIssuedAt(long issuedAt) {
         this.issuedAt = issuedAt;
         return this;
     }
@@ -30,7 +30,7 @@ class AuthToken {
         return expireAt;
     }
 
-    public AuthToken setExpireAt(long expireAt) {
+    public AuthTokenTO setExpireAt(long expireAt) {
         this.expireAt = expireAt;
         return this;
     }
@@ -39,7 +39,7 @@ class AuthToken {
         return seed;
     }
 
-    public AuthToken setSeed(long seed) {
+    public AuthTokenTO setSeed(long seed) {
         this.seed = seed;
         return this;
     }
@@ -48,7 +48,7 @@ class AuthToken {
         return sing;
     }
 
-    public AuthToken setSing(String sing) {
+    public AuthTokenTO setSing(String sing) {
         this.sing = sing;
         return this;
     }

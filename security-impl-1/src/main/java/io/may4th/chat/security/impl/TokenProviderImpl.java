@@ -25,10 +25,8 @@ public class TokenProviderImpl extends BaseCoder implements TokenProvider {
 
     private final byte[] secret;
 
-
-
     @Autowired
-    TokenProviderImpl(ObjectMapper objectMapper) {
+    public TokenProviderImpl(ObjectMapper objectMapper) {
         super(ALGORITHM);
         this.secret = new byte[SECRET_LENGTH];
         new Random().nextBytes(this.secret);
@@ -37,7 +35,7 @@ public class TokenProviderImpl extends BaseCoder implements TokenProvider {
 
     @Override
     public String generateToken(UserDetails userDetails, long now) {
-        var authToken = new AuthToken()
+        var authToken = new AuthTokenTO()
             .setUserId(userDetails.getId())
             .setIssuedAt(now)
             .setExpireAt(now + LIFETIME_MILLIS)
@@ -52,16 +50,16 @@ public class TokenProviderImpl extends BaseCoder implements TokenProvider {
         }
     }
 
-    AuthToken extractToken(String token) {
+    public AuthTokenTO extractAuthTokenTO(String token) {
         try {
-            return objectMapper.readValue(decode(token), AuthToken.class);
+            return objectMapper.readValue(decode(token), AuthTokenTO.class);
         } catch (Exception e) {
             throw new AuthenticationException(e);
         }
     }
 
-    boolean isValid(AuthToken authToken) {
-        return Objects.equals(authToken.getSing(), sing(authToken)) && System.currentTimeMillis() < authToken.getExpireAt();
+    public boolean isSingValid(AuthTokenTO authTokenTo) {
+        return Objects.equals(authTokenTo.getSing(), sing(authTokenTo));
     }
 
     private byte[] toBytes(long... longs) {
@@ -72,10 +70,10 @@ public class TokenProviderImpl extends BaseCoder implements TokenProvider {
         return buffer.array();
     }
 
-    private String sing(AuthToken authToken) {
+    private String sing(AuthTokenTO authTokenTo) {
         return encode(hash(
-            authToken.getUserId().getBytes(),
-            toBytes(authToken.getIssuedAt(), authToken.getExpireAt(), authToken.getSeed()),
+            authTokenTo.getUserId().getBytes(),
+            toBytes(authTokenTo.getIssuedAt(), authTokenTo.getExpireAt(), authTokenTo.getSeed()),
             secret
         ));
     }
