@@ -2,6 +2,7 @@ package io.may4th.chat.web.controllers;
 
 import io.may4th.chat.security.api.CurrentUser;
 import io.may4th.chat.security.api.Secured;
+import io.may4th.chat.services.api.tos.MessageTO;
 import io.may4th.chat.web.payload.ApiErrorResponse;
 import io.may4th.chat.web.payload.AuthTokenResponse;
 import io.may4th.chat.web.payload.SignInRequest;
@@ -38,6 +39,10 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
+    @ApiResponses({
+        @ApiResponse(code = 200, message = "OK", response = AuthTokenResponse.class),
+        @ApiResponse(code = 409, message = "Conflict")
+    })
     public AuthTokenResponse signup(@RequestBody @Valid SignUpRequest signUpRequest) {
         return authService.signup(signUpRequest.getUsername(), signUpRequest.getPassword());
     }

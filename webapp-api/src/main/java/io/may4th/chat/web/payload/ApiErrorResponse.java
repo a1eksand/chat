@@ -21,7 +21,7 @@ public class ApiErrorResponse {
     private final String message;
 
     @ApiModelProperty(required = true)
-    private List<String> errors = Collections.emptyList();
+    private final List<String> errors;
 
     public ApiErrorResponse(HttpStatus status, String message, String error) {
         this(status, message, Collections.singletonList(error));
@@ -30,5 +30,6 @@ public class ApiErrorResponse {
     public ApiErrorResponse(HttpStatus status, String message) {
         this.status = status;
         this.message = message;
+        this.errors = Collections.emptyList();
     }
 }
