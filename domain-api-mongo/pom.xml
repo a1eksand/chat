@@ -10,9 +10,9 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>chat-domain-api</artifactId>
+    <artifactId>chat-domain-api-mongo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>chat-domain-api</name>
+    <name>chat-domain-api-mongo</name>
 
     <dependencies>
         <dependency>

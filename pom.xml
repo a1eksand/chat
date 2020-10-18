@@ -17,7 +17,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>domain-api</module>
+        <module>domain-api-mongo</module>
         <module>domain-impl-mongo</module>
         <module>service-api</module>
         <module>service-impl-mongo</module>

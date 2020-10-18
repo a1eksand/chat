@@ -17,7 +17,7 @@
     <dependencies>
         <dependency>
             <groupId>io.may4th</groupId>
-            <artifactId>chat-domain-api</artifactId>
+            <artifactId>chat-domain-api-mongo</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
