@@ -6,21 +6,30 @@
 - Docker 19
 - Docker Compose 1.25
 
-## Available Scripts of .
+## Available Scripts
 
-#### `./mvnw clean package -DskipTests && docker build -f dev-chat-webapp-mdb-s1.Dockerfile -t chat-webapp-mdb-s1:SNAPSHOT . && ./mvnw clean`
+```
+./mvnw clean package -DskipTests
+docker build -f appjre.Dockerfile --build-arg JAR="webapp-mdb-s1/target/chat-webapp-mdb-s1-0.0.1-SNAPSHOT.jar" -t chat-webapp-mdb-s1:SNAPSHOT .
+docker build -f appjre.Dockerfile --build-arg JAR="webapp-pdb-s1/target/chat-webapp-pdb-s1-0.0.1-SNAPSHOT.jar" -t chat-webapp-pdb-s1:SNAPSHOT .
+```
 
-Builds backend app image
+Builds backend app images
 
-#### `docker-compose -f docker-compose-dev-storage-mongodb.yml up`
+```
+docker-compose -f docker-compose-dev-storage-mongodb.yml up
+docker-compose -f docker-compose-dev-storage-postgres.yml up
+```
 
-Ups MongoDB
+Ups storages
 
 ## Available Scripts of webapp
 
-#### `./mvnw spring-boot:run`
+```
+./mvnw spring-boot:run
+```
 
-Runs backend app in development mode
+Runs backend app
 
 > Next - open [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
 
@@ -33,20 +42,27 @@ Runs backend app in development mode
 - Docker 19
 - Docker Compose 1.25
 
-## Available Scripts of .
+## Available Scripts
 
-#### `yarn`
+```
+yarn
+```
 
 Installs required packages
 
-#### `docker-compose -f docker-compose-dev-chat-webapp-mdb-s1.yml up`
+```
+docker-compose -f docker-compose-dev-chat-webapp-mdb-s1.yml up
+docker-compose -f docker-compose-dev-chat-webapp-pdb-s1.yml up
+```
 
-Ups MongoDB and backend app
+Ups storages and backend apps
 
-## Available Scripts of packages/web/
+## Available Scripts of packages/web
 
-#### `yarn start`
+```
+yarn start
+```
 
-Runs frontend app in development mode
+Runs frontend app
 
 > Next - open [http://localhost:3000](http://localhost:3000)

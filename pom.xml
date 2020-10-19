@@ -17,15 +17,19 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>domain-api-hiber</module>
         <module>domain-api-mongo</module>
+        <module>domain-impl-hiber</module>
         <module>domain-impl-mongo</module>
         <module>service-api</module>
+        <module>service-impl-hiber</module>
         <module>service-impl-mongo</module>
         <module>security-api</module>
         <module>security-impl-1</module>
         <module>webapp-api</module>
         <module>webapp-impl</module>
         <module>webapp-mdb-s1</module>
+        <module>webapp-pdb-s1</module>
     </modules>
 
     <properties>
