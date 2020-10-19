@@ -9,6 +9,8 @@ import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
+import java.util.Objects;
+
 @Component
 public class CurrentUserArgumentResolverImpl implements CurrentUserArgumentResolver {
 
@@ -21,7 +23,7 @@ public class CurrentUserArgumentResolverImpl implements CurrentUserArgumentResol
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        return parameter.getParameterAnnotation(CurrentUser.class) != null;
+        return Objects.nonNull(parameter.getParameterAnnotation(CurrentUser.class));
     }
 
     @Override

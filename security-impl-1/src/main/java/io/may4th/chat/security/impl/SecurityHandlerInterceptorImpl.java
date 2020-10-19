@@ -11,6 +11,7 @@ import org.springframework.web.method.HandlerMethod;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
+import java.util.Objects;
 
 @Component
 public class SecurityHandlerInterceptorImpl implements SecurityHandlerInterceptor {
@@ -31,12 +32,12 @@ public class SecurityHandlerInterceptorImpl implements SecurityHandlerIntercepto
         var handlerMethod = (HandlerMethod) handler;
 
         var classLevelSecure = handlerMethod.getBeanType().getAnnotation(Secured.class);
-        if (classLevelSecure != null) {
+        if (Objects.nonNull(classLevelSecure)) {
             check(classLevelSecure);
         }
 
         var methodLevelSecure = handlerMethod.getMethodAnnotation(Secured.class);
-        if (methodLevelSecure != null) {
+        if (Objects.nonNull(methodLevelSecure)) {
             check(methodLevelSecure);
         }
 

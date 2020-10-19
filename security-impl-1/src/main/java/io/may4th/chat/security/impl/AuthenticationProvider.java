@@ -33,7 +33,9 @@ public class AuthenticationProvider {
     }
 
     private Optional<String> extractToken(HttpServletRequest request) {
-        return request != null ? Optional.ofNullable(request.getHeader(AUTHORIZATION_HEADER)) : Optional.empty();
+        return Optional
+            .ofNullable(request)
+            .map(req -> req.getHeader(AUTHORIZATION_HEADER));
     }
 
     private boolean isNotExpired(AuthTokenTO authTokenTo) {

@@ -23,7 +23,7 @@ class JSR310DateConverters {
 
         @Override
         public Date convert(LocalDate source) {
-            return source == null ? null : Date.from(source.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            return Date.from(source.atStartOfDay(ZoneId.systemDefault()).toInstant());
         }
     }
 
@@ -36,8 +36,7 @@ class JSR310DateConverters {
 
         @Override
         public LocalDate convert(Date source) {
-            return source == null ? null : ZonedDateTime.ofInstant(source.toInstant(), ZoneId.systemDefault())
-                .toLocalDate();
+            return ZonedDateTime.ofInstant(source.toInstant(), ZoneId.systemDefault()).toLocalDate();
         }
     }
 
@@ -50,7 +49,7 @@ class JSR310DateConverters {
 
         @Override
         public Date convert(ZonedDateTime source) {
-            return source == null ? null : Date.from(source.toInstant());
+            return Date.from(source.toInstant());
         }
     }
 
@@ -63,7 +62,7 @@ class JSR310DateConverters {
 
         @Override
         public ZonedDateTime convert(Date source) {
-            return source == null ? null : ZonedDateTime.ofInstant(source.toInstant(), ZoneId.systemDefault());
+            return ZonedDateTime.ofInstant(source.toInstant(), ZoneId.systemDefault());
         }
     }
 
@@ -76,7 +75,7 @@ class JSR310DateConverters {
 
         @Override
         public Date convert(LocalDateTime source) {
-            return source == null ? null : Date.from(source.atZone(ZoneId.systemDefault()).toInstant());
+            return Date.from(source.atZone(ZoneId.systemDefault()).toInstant());
         }
     }
 
@@ -89,7 +88,7 @@ class JSR310DateConverters {
 
         @Override
         public LocalDateTime convert(Date source) {
-            return source == null ? null : LocalDateTime.ofInstant(source.toInstant(), ZoneId.systemDefault());
+            return LocalDateTime.ofInstant(source.toInstant(), ZoneId.systemDefault());
         }
     }
 
@@ -102,7 +101,7 @@ class JSR310DateConverters {
 
         @Override
         public Long convert(Duration source) {
-            return source == null ? null : source.toMillis();
+            return source.toMillis();
         }
     }
 
@@ -115,7 +114,7 @@ class JSR310DateConverters {
 
         @Override
         public Duration convert(Long source) {
-            return source == null ? null : Duration.ofMillis(source);
+            return Duration.ofMillis(source);
         }
     }
 }
