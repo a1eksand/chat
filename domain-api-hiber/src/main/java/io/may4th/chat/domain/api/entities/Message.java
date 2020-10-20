@@ -1,14 +1,16 @@
 package io.may4th.chat.domain.api.entities;
 
+import io.may4th.chat.domain.api.CommonValidation;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
@@ -31,7 +33,9 @@ public class Message {
     @NotNull
     private ZonedDateTime timestamp;
 
-    @Length(min = 1, max = 4096)
+    @NotNull
     @NotBlank
+    @Size(min = 1, max = 4096)
+    @Pattern(regexp=CommonValidation.TRIMMED_MULTI_LINE)
     private String body;
 }

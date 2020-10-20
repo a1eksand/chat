@@ -5,9 +5,11 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Accessors(chain = true)
 @ApiModel
@@ -16,12 +18,16 @@ import javax.validation.constraints.NotBlank;
 public class SignUpRequest {
 
     @ApiModelProperty(required = true, example = "John")
+    @NotNull
     @NotBlank
-    @Length(min = 4, max = 64)
+    @Size(min = 4, max = 64)
+    @Pattern(regexp= CommonValidation.WITHOUT_WHITESPACE)
     private String username;
 
     @ApiModelProperty(required = true, example = "pass")
+    @NotNull
     @NotBlank
-    @Length(min = 4, max = 64)
+    @Size(min = 4, max = 64)
+    @Pattern(regexp= CommonValidation.WITHOUT_WHITESPACE)
     private String password;
 }

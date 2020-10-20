@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Accessors(chain = true)
 @ApiModel
@@ -15,10 +16,12 @@ import javax.validation.constraints.NotBlank;
 public class SignInRequest {
 
     @ApiModelProperty(required = true, example = "John")
+    @NotNull
     @NotBlank
     private String username;
 
     @ApiModelProperty(required = true, example = "pass")
+    @NotNull
     @NotBlank
     private String password;
 }
